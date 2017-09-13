@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#PBS -j oe
+#PBS -l walltime=00:10:00
+#PBS -l mem=256mb
+#PBS -l ncpus=1
+
+cd ~/Projects/Schellingv4
+
+matlab -nosplash -nodisplay -nodesktop -r "paramconsolidate('params2.txt');exit"
+
+echo "Finished consolidating data"

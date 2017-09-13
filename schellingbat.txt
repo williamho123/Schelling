@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#PBS -J 1-40
+#PBS -j oe
+#PBS -l walltime=08:00:00
+#PBS -l mem=2048mb
+#PBS -l ncpus=6
+
+cd ~/Projects/Schellingv4
+
+params=`sed -n "${PBS_ARRAY_INDEX} p" params2.txt`
+paramsarray=($params)
+
+p1=${paramsarray[0]}
+p2=${paramsarray[1]}
+p3=${paramsarray[2]}
+p4=${paramsarray[3]}
+p5=${paramsarray[4]}
+p6=${paramsarray[5]}
+p7=${paramsarray[6]}
+p8=${paramsarray[7]}
+p9=${paramsarray[8]}
+
+matlab -nosplash -nodisplay -nodesktop -r "sim_multiple(${p1},${p2},${p3},${p4},${p5},${p6},${p7},${p8},${p9});exit"
+
+echo "Finished job number ${PBS_ARRAY_INDEX} with parameters $p1 $p2 $p3 $p4 $p5 $p6 $p7 $p8 for $p9 runs"
